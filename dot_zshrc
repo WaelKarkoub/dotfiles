@@ -64,7 +64,6 @@ alias k="kubectl"
 alias nvimrc="cd ~/.config/nvim/ && ${EDITOR:-nvim}"
 alias voguerc="cd ~/workspaces/vogue/ && ${EDITOR:-nvim}"
 alias zshrc="cd ~ && ${EDITOR:-nvim} .zshrc"
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias vim="nvim"
 
 if [[ $TERM == "xterm-kitty" ]]; then
