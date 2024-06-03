@@ -1,0 +1,11 @@
+[user]
+    email = wael.karkoub96@gmail.com
+    name = Wael Karkoub
+[alias]
+    wip = commit -am "wip"
+    slog = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
