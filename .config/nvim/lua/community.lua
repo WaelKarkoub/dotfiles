@@ -5,15 +5,22 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
-  { import = "astrocommunity.pack.lua" },
-  -- import/override with your plugins folder
+  { import = "astrocommunity.recipes.telescope-lsp-mappings" },
+  -- Themes
+  { import = "astrocommunity.colorscheme.kanagawa-nvim" },
   { import = "astrocommunity.colorscheme.tokyonight-nvim" },
+  -- Misc
+  { import = "astrocommunity.editing-support.telescope-undo-nvim" },
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
+  { import = "astrocommunity.lsp.actions-preview-nvim" },
+  { import = "astrocommunity.lsp.garbage-day-nvim" },
   { import = "astrocommunity.motion.flash-nvim" },
+  { import = "astrocommunity.motion.nvim-spider" },
+  { import = "astrocommunity.test.nvim-coverage" },
+  -- Language packs
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.docker" },
-  { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.html-css" },
   { import = "astrocommunity.pack.json" },
   { import = "astrocommunity.pack.lua" },
@@ -23,8 +30,6 @@ return {
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.toml" },
   { import = "astrocommunity.pack.yaml" },
-  { import = "astrocommunity.test.nvim-coverage" },
-  -- { import = "astrocommunity.workflow.hardtime-nvim" },
 
   -- Customize Plugins
   {
@@ -87,6 +92,13 @@ return {
     opts = function(_, opts)
       opts.parents = 0
       opts.name = { "venv", ".venv" }
+    end,
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    opts = function(_, opts)
+      opts.dimInactive = true
+      opts.compile = true
     end,
   },
 }
