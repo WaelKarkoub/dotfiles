@@ -14,19 +14,25 @@ bindkey -v
 export EDITOR="nvim"
 export TERMINAL="kitty"
 export BROWSER="google-chrome"
+export DOTFILES="$HOME/.dotfiles"
 
-export PATH="$HOME/.local/bin":$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$HOME/.local/share/go/bin:$PATH
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export PATH="$GEM_HOME/bin:$PATH"
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export MANPAGER='nvim +Man!'
 export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 export GOPATH=$HOME/go
 export XDG_CURRENT_DESKTOP="Wayland"
-export UE4_ROOT=~/UnrealEngine_4.26
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export BAT_THEME=tokyonight_night 
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
+export PATH="$HOME/.local/bin":$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/share/go/bin:$PATH
+export PATH="$GEM_HOME/bin:$PATH"
+
+
+# brew
+source "$HOME/.cargo/env"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Plugins
 ## Download Zinit, if it's not there yet
@@ -61,13 +67,12 @@ zinit cdreplay -q
 
 # Aliases
 alias k="kubectl"
-alias nvimrc="cd ~/.config/nvim/ && ${EDITOR:-nvim}"
-alias voguerc="cd ~/workspaces/vogue/ && ${EDITOR:-nvim}"
-alias zshrc="cd ~ && ${EDITOR:-nvim} .zshrc"
-alias vim="nvim"
+alias nvimrc="cd ${DOTFILES}/nvim/.config/nvim/ && ${EDITOR:-vim}"
+alias zshrc="cd ${DOTFILES}/zsh/ && ${EDITOR:-vim} .zshrc"
+alias dotrc="cd ${DOTFILES}/ && ${EDITOR:-vim} ."
 
 if [[ $TERM == "xterm-kitty" ]]; then
-	  alias ssh="kitty +kitten ssh"
+	  alias ssh="kitten ssh"
 fi
 
 if command -v bat &> /dev/null; then
@@ -76,12 +81,13 @@ if command -v bat &> /dev/null; then
 fi
 
 if command -v eza &> /dev/null; then
-	alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+	alias ls="eza --color=always --git --icons=always --sort=type \"\$@\""
 fi
 
 # History
 HISTFILE=~/.histfile
 HISTSIZE=1000
+export HISTTIMEFORMAT="%F %T "
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
 setopt APPEND_HISTORY
@@ -93,12 +99,11 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
 
-# brew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Advanced customization of fzf options via _fzf_comprun function
 # - The first argument to the function is the name of the command.
 # - You should make sure to pass the rest of the arguments to fzf.
+show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else batcat -n --color=always --line-range :500 {}; fi"
 _fzf_comprun() {
   local command=$1
   shift
@@ -137,3 +142,13 @@ if (( $+commands[zoxide] )); then
 else
   echo 'zoxide: command not found, please install it from https://github.com/ajeetdsouza/zoxide'
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [ -f ~/.nimble.zsh ]; then
+    source ~/.nimble.zsh
+fi
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"

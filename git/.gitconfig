@@ -1,6 +1,3 @@
-[user]
-    email = wael.karkoub96@gmail.com
-    name = Wael Karkoub
 [alias]
     wip = commit -am "wip"
     slog = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
