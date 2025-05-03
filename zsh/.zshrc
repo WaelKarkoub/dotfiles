@@ -31,8 +31,13 @@ export PATH="$GEM_HOME/bin:$PATH"
 
 
 # brew
-source "$HOME/.cargo/env"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [ -f "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
+
+if [ -f /home/wael/.linuxbrew/bin/brew ]; then
+    eval "$(/home/wael/.linuxbrew/bin/brew shellenv)"
+fi
 
 # Plugins
 ## Download Zinit, if it's not there yet
