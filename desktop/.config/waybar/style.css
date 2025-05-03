@@ -1,0 +1,154 @@
+/* Tokyonight Waybar CSS - Based on theme colors */
+/* Requires a Nerd Font for icons */
+
+/* Import Tokyonight colors (adjust path if needed) */
+/* This assumes you have a colors.css defining Tokyonight vars */
+/* @import url("colors.css"); */
+
+/* Define colors directly if not importing */
+@define-color bg #1a1b26;
+@define-color fg #c0caf5;
+@define-color surface0 #1f2335;
+@define-color surface1 #24283b;
+@define-color surface2 #292e42;
+@define-color overlay0 #3b4261;
+@define-color overlay1 #414868; /* comment */
+@define-color overlay2 #545c7e; /* fg_dark */
+
+@define-color red #f7768e;
+@define-color orange #ff9e64;
+@define-color yellow #e0af68;
+@define-color green #9ece6a;
+@define-color cyan #7dcfff;
+@define-color blue #7aa2f7;
+@define-color magenta #bb9af7; /* purple */
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family:
+    "Noto Sans", "Font Awesome 6 Free", "Font Awesome 6 Brands",
+    "Noto Sans Mono CJK JP"; /* Add your Nerd Font */
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: alpha(@bg, 0.85); /* Semi-transparent background */
+  color: @fg;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  margin: 3px 3px;
+  background-color: @surface1;
+  color: @overlay2; /* Dim inactive */
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+  background-color: @surface2;
+  color: @fg;
+}
+
+#workspaces button.focused {
+  background-color: @blue;
+  color: @bg;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+  color: @bg;
+}
+
+#window {
+  padding: 0 10px;
+  color: @fg;
+  font-weight: bold;
+}
+
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#tray,
+#custom-notification,
+#custom-settings {
+  padding: 0 10px;
+  margin: 3px 3px;
+  color: @fg;
+  background-color: @surface1;
+  border-radius: 5px;
+}
+
+#clock {
+  background-color: @surface0; /* Slightly different bg for clock */
+}
+
+#battery.charging,
+#battery.plugged {
+  color: @green;
+}
+
+#battery.warning {
+  color: @yellow;
+}
+
+#battery.critical {
+  color: @red;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#network {
+  color: @cyan;
+}
+#network.disconnected {
+  color: @red;
+  background-color: @surface1; /* Keep background consistent */
+}
+
+#pulseaudio {
+  color: @magenta;
+}
+#pulseaudio.muted {
+  color: @overlay1; /* Greyed out */
+}
+
+#custom-notification {
+  color: @blue;
+}
+#custom-notification.none {
+  /* Class swaync adds when count is 0 */
+  color: @overlay1;
+}
+#custom-notification.dnd-notification,
+#custom-notification.dnd-none {
+  background-color: @surface2; /* Different bg for DND */
+  color: @blue;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @red;
+}
+
+@keyframes blink {
+  to {
+    background-color: @red;
+    color: @bg;
+  }
+}
+
+#custom-settings:hover {
+  background-color: @surface2;
+}

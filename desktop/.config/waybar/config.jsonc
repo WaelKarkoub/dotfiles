@@ -1,0 +1,147 @@
+{
+  "layer": "top", // Waybar on top 
+  "position": "top", // Bar position 
+  "height": 30, // Bar height 
+  // "output": "DP-1", // Uncomment to restrict bar to a specific monitor 
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/mode"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "custom-settings",
+    "pulseaudio",
+    "network",
+    "battery",
+    "clock",
+    "tray",
+  ],
+  "hyprland/workspaces": {
+    "format": "{icon}", // Use icons or {id} for numbers
+    "format-icons": {
+      // Example icons (requires Nerd Font)
+      "1": "󰎦", // Terminal/Code
+      "2": "󰎩", // Comms (Discord)
+      "3": "󰎬", // Code/Editor
+      "4": "󰎮", // Generic
+      "5": "󰎵", // Music (Spotify)
+      "default": "󰎠",
+      "focused": "󰎣",
+      "persistent": "󰎠",
+    },
+    "on-click": "activate", // Click to switch workspace 
+    "persistent_workspaces": {
+      "6": [
+        "DP-1"
+      ],
+      "7": [
+        "DP-1"
+      ],
+      "8": [
+        "DP-1"
+      ],
+      "9": [
+        "DP-1"
+      ],
+      "10": [
+        "DP-1"
+      ], // Show these on DP-1 if present
+    },
+    "all-outputs": false, // Show workspaces only on their assigned monitor
+  },
+  "hyprland/window": {
+    "format": "{}", // Show current window title
+    "max-length": 35, // Limit title length 
+    "separate-outputs": true, // Show only window title for the current monitor 
+  },
+  "clock": {
+    "format": "{:%H:%M 󰥔 %a %d %b}", // Example: 14:30  Mon 28 Apr
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}",
+  },
+  "custom-settings": {
+    "format": "󰒓", // Settings icon (Nerd Font) 
+    "tooltip": false,
+    "on-click": "gnome-control-center", // Or systemsettings, nwg-look, etc. 
+  },
+  "custom/notification": {
+    // SwayNC integration 
+    "tooltip": false,
+    "format": "{count} {icon}",
+    "format-icons": {
+      "notification": "", // Has notifications
+      "none": "", // No notifications
+      "dnd-notification": "", // DND on, has notifications
+      "dnd-none": "󰂛", // DND on, no notifications
+      "inhibited-notification": " inhibited",
+      "inhibited-none": "󰂜 inhibited",
+      "pending": "", // Processing...
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb", // Subscribe to state changes 
+    "on-click": "sleep 0.1 && swaync-client -t", // Toggle panel (sleep fix!) 
+    "on-click-right": "swaync-client -d", // Toggle DND 
+    "escape": true,
+  },
+  "pulseaudio": {
+    // Works with Pipewire-Pulse 
+    "format": "{volume}% {icon}",
+    "format-muted": " Muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ], // Icons for different volume levels 
+    },
+    "scroll-step": 5, // Volume change per scroll step 
+    "on-click": "pavucontrol", // Open volume control 
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle", // Toggle mute
+    "tooltip-format": "{volume}% {format_source}",
+  },
+  "network": {
+    // 
+    "interface": "wlan*", // Detect wireless interfaces (e.g., wlan0, wlp*)
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ifname} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "󰖪 Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "tooltip-format": "{essid} ({signalStrength}%) - {ipaddr}",
+    "on-click": "nm-connection-editor", // NetworkManager connection editor
+  },
+  "battery": {
+    // 
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ], // Battery level icons 
+    // "bat": "BAT0", // Specify battery if needed 
+    "interval": 60,
+  },
+  "tray": {
+    // System tray 
+    "icon-size": 18,
+    "spacing": 5,
+  },
+}
