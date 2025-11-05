@@ -1,6 +1,8 @@
 [alias]
+    keenan = commit -am "add keenan's work"
     wip = commit -am "wip"
     slog = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
 [filter "lfs"]
     required = true
     clean = git-lfs clean -- %f

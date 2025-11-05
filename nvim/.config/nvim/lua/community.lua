@@ -50,7 +50,9 @@ return {
         },
         {
           prefix .. "h",
-          function() require("coverage").hide() end,
+          function()
+            require("coverage").hide()
+          end,
           desc = "Hide Code Coverage",
         },
         {
@@ -63,7 +65,9 @@ return {
           desc = "Show Code Coverage Summary",
         },
       }
-      mappings = vim.tbl_filter(function(m) return m[1] and #m[1] > 0 end, mappings)
+      mappings = vim.tbl_filter(function(m)
+        return m[1] and #m[1] > 0
+      end, mappings)
       return mappings
     end,
     opts = function(_, opts)
@@ -77,7 +81,9 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    opts = function(_, opts) opts.dim_inactive = true end,
+    opts = function(_, opts)
+      opts.dim_inactive = true
+    end,
   },
   {
     "linux-cultist/venv-selector.nvim",
