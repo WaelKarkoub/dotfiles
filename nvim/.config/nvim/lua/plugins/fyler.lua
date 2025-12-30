@@ -6,40 +6,44 @@ return {
 		{
 			"<Leader>e",
 			function()
-				local win_id = vim.fn.bufwinid("fyler")
-				if win_id ~= -1 then
-					vim.api.nvim_win_close(win_id, true)
-				else
-					require("fyler").open()
-				end
+				require("fyler").toggle()
 			end,
 			desc = "Toggle Fyler",
 		},
 	},
 	opts = {
-		git_status = {
-			enabled = true,
+		integrations = {
+			icon = "nvim_web_devicons",
 		},
-		icon = {
-			directory_collapsed = "",
-			directory_empty = "",
-			directory_expanded = "",
-		},
-		indentscope = {
-			enabled = true,
-			marker = "│",
-		},
-		-- Fyler options are configured here
-		-- For a full list of options, see: https://github.com/A7Lavinraj/fyler.nvim#configuration
-		win = {
-			kind = "split_left",
-			border = "rounded",
-			kind_presets = {
-				split_left = {
-					width = "30abs",
+		views = {
+			finder = {
+				default_explorer = true,
+				delete_to_trash = true,
+				git_status = {
+					enabled = true,
+				},
+				icon = {
+					directory_collapsed = "",
+					directory_empty = "",
+					directory_expanded = "",
+				},
+				indentscope = {
+					enabled = true,
+					marker = "│",
+				},
+				watcher = {
+					enabled = true,
+				},
+				win = {
+					kind = "split_left_most",
+					border = "rounded",
+					kinds = {
+						split_left_most = {
+							width = 30,
+						},
+					},
 				},
 			},
 		},
-		icon_provider = "nvim_web_devicons",
 	},
 }

@@ -1,0 +1,97 @@
+/* Example Wofi CSS using Tokyonight colors */
+/* Based on https://github.com/w8ste/Tokyonight-rofi-theme structure */
+
+/* Define colors */
+@define-color background #1a1b26;
+@define-color foreground #c0caf5;
+@define-color surface1 #24283b; /* Entry background */
+@define-color surface2 #292e42; /* Hover background */
+@define-color blue #7aa2f7;     /* Selected entry background */
+@define-color magenta #bb9af7; /* Input text color */
+@define-color comment #414868;   /* Placeholder text color */
+
+window {
+    background-color: @background;
+    border: 2px solid @blue;
+    border-radius: 10px;
+    font-family: "Noto Sans", Nerd Fonts; /* Add your Nerd Font */
+}
+
+#input {
+    margin: 10px;
+    padding: 8px;
+    background-color: @surface1;
+    color: @magenta;
+    border-radius: 5px;
+    border: none;
+}
+
+#input placeholder {
+    color: @comment;
+}
+
+#inner-box {
+    margin: 5px;
+}
+
+#outer-box {
+    margin: 10px;
+}
+
+#scroll {
+    margin-top: 5px;
+}
+
+#entry {
+    padding: 8px;
+    border-radius: 5px;
+    color: @foreground;
+}
+
+#entry:selected {
+    background-color: @blue;
+    color: @background;
+}
+
+#entry:hover {
+    background-color: @surface2;
+}
+
+#text {
+    margin-left: 10px;
+}
+
+#img {
+    margin-right: 10px;
+}
+
+# ==========================================================
+# === Applying GTK/Qt Themes ===============================
+# ==========================================================
+
+# To apply the Tokyonight theme consistently:
+
+# 1. Install GTK Theme:
+#    - Download from GitHub: https://github.com/Fausto-Korpsvart/Tokyonight-GTK-Theme
+#    - Or use AUR package: `tokyonight-gtk-theme-git`
+#    - Follow installation instructions (usually involves running `./install.sh` or placing files in ~/.themes)
+
+# 2. Install Qt Theme (Optional - Kvantum):
+#    - Install Kvantum Manager (`kvantum`).
+#    - Download a Tokyonight Kvantum theme (e.g., https://github.com/0xsch1zo/Kvantum-Tokyo-Night)
+#    - Install the theme via Kvantum Manager.
+#    - Select the Tokyonight theme in Kvantum Manager.
+#    - Set `env = QT_STYLE_OVERRIDE,Kvantum` in environment.conf.
+
+# 3. Install Cursor Theme (Optional):
+#    - Find a Tokyonight cursor theme (e.g., `xcursor-simp1e-tokyo-night` on AUR)
+#    - Install it.
+#    - Set `env = XCURSOR_THEME,YourCursorName` in environment.conf.
+
+# 4. Apply Themes:
+#    - Use `nwg-look` (recommended) or `lxappearance` to select the installed Tokyonight GTK theme and cursor theme. [10, 12]
+#    - Use `qt5ct` and `qt6ct` to select the GTK2 style (or Kvantum if using it) to make Qt apps follow the GTK theme. [10, 12]
+#    - Ensure `env = GTK_THEME,YourThemeName` and `env = QT_QPA_PLATFORMTHEME,qt5ct` (or qt6ct) are set in environment.conf.
+
+# 5. Restart Applications:
+#    - Some applications might need a restart to pick up the new theme settings.

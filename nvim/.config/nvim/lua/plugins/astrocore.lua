@@ -80,6 +80,14 @@ return {
         -- this is useful for naming menus
         -- ["<Leader>b"] = { desc = "Buffers" },
 
+        -- Toggle formatting globally
+        ["<Leader>uf"] = {
+          function()
+            require("astrolsp.toggles").autoformat()
+          end,
+          desc = "Toggle autoformatting (global)",
+        },
+
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
       },

@@ -1,3 +1,17 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("/home/wael/.zsh/completions" $fpath)
+autoload -Uz compinit
+compinit
+# OPENSPEC:END
+
+# brew
+if [ -f "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -30,9 +44,6 @@ export PATH=$HOME/.local/share/go/bin:$PATH
 export PATH="$GEM_HOME/bin:$PATH"
 
 
-# brew
-source "$HOME/.cargo/env"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Plugins
 ## Download Zinit, if it's not there yet
@@ -152,3 +163,7 @@ if [ -f ~/.nimble.zsh ]; then
 fi
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
